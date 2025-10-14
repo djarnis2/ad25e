@@ -28,20 +28,19 @@ public class Stack {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Stack stack = new Stack();
-//        stack.push("(");
-//        stack.push(")");
-//        stack.show();
-//        System.out.println("after show");
+        stack.push("(");
+        stack.push(")");
+        stack.show();
 
-        System.out.println("Check balPar with [()()(){] (should be false): " + stack.balPar("[()()(){]"));
-        System.out.println("Check balPar with [()()(){]) (should be false): " + stack.balPar("[()()(){])"));
-        System.out.println("Check balPar with [()()(){}] (should be true): " + stack.balPar("[()()(){}]"));
+        System.out.println("Check balPar with [()()(){] (should be false): " + stack.balancedParentheses("[()()(){]"));
+        System.out.println("Check balPar with [()()(){]) (should be false): " + stack.balancedParentheses("[()()(){])"));
+        System.out.println("Check balPar with [()()(){}] (should be true): " + stack.balancedParentheses("[()()(){}]"));
 
     }
 
-    public boolean balPar(String text) {
+    public boolean balancedParentheses(String text) {
         Stack stack1 = new Stack();
         for (int i = 0; i < text.length(); i++) {
             if (text.charAt(i) == '('|| text.charAt(i) == '{' || text.charAt(i) == '[') {
