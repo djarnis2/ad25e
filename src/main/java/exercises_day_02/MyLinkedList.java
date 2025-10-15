@@ -1,7 +1,5 @@
 package exercises_day_02;
 
-import com.sun.security.jgss.GSSUtil;
-
 public class MyLinkedList {
     private Object element;
     private MyLinkedList tail;
@@ -72,6 +70,7 @@ public class MyLinkedList {
         return removed;
     }
 
+
     @Override
     public String toString() {
         return element + (tail != null ? " -> " + tail : "");
@@ -99,7 +98,7 @@ public class MyLinkedList {
         System.out.println(myList.toString());
         System.out.println(myList.length());
         System.out.println("Testing delete on idx 0");
-        myList.delete(0);
+        System.out.println("Deleted: " + myList.delete(0));
         System.out.println(myList);
     }
 }
