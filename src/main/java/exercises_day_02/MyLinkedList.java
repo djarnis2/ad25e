@@ -1,5 +1,7 @@
 package exercises_day_02;
 
+// My own attempt to implement a linked list
+
 public class MyLinkedList {
     private Object element;
     private MyLinkedList tail;
@@ -32,6 +34,8 @@ public class MyLinkedList {
 
     public void insert(Object element, int idx) {
         if (idx < 0) return;
+        // Special case: because there is no header node, inserting at index 0 requires shifting
+        // the current head node down and replacing its element, instead of simply linking before it.
         if (idx == 0) {
             this.tail = new MyLinkedList(this.element, this.tail);
             this.element = element;
@@ -49,15 +53,21 @@ public class MyLinkedList {
         if (idx < 0) {
             return null;
         }
+        // Special case: without a header node, deleting index 0 requires copying data from the
+        // second node into the first, since we cannot change the external reference to the list.
         if (idx == 0) {
-            Object removed = this.element;
+            Object removed = this.element; // this.element is not specifically removed, that is left for the garbage collector to do.
+            // If the list consists of several elements
             if (this.tail != null) {
-                this.element = this.tail.element;
-                this.tail = this.tail.tail;
+                this.element = this.tail.element; // Effectively makes a new list starting from the element found through the tail of the first element.
+                this.tail = this.tail.tail; // legal because tail != null, this.tail.tail is allowed to be null.
+                // Else the list consists of one element only
             } else {
-                this.element = null;
-            } return removed;
-        } MyLinkedList prev = this;
+                this.element = null; // Clears the element in the head node; list will appear empty if emptiness is defined by element == null.
+            }
+            return removed;
+        }
+        MyLinkedList prev = this;
         int i = 0;
         while (prev.tail != null && i < idx - 1) {
             i++;
