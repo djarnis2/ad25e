@@ -102,8 +102,8 @@ public class MyDoublyLinkedList<T> implements Iterable<T> {
      * @return the item was removed from the collection.
      */
     private T remove(Node<T> p) {
-        p.next.prev = p.prev;
-        p.prev.next = p.next;
+        p.next.prev = p.prev; // The  node after p (p.next) gets assigned p's prev as prev.
+        p.prev.next = p.next; // The node before p (p.prev) get assigned p's next as next.
         theSize--;
         modCount++;
 
@@ -136,11 +136,13 @@ public class MyDoublyLinkedList<T> implements Iterable<T> {
         if (idx < lower || idx > upper)
             throw new IndexOutOfBoundsException();
 
+        // In the lower half of the list, start from beginning go until idx is reached.
         if (idx < size() / 2) {
             p = beginMarker.next;
             for (int i = 0; i < idx; i++) {
                 p = p.next;
             }
+            // In the upper half of the list, start at the end and go backwards and move until idx is reached.
         } else {
             p = endMarker;
             for (int i = size(); i > idx; i--) {

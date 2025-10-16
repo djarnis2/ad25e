@@ -4,19 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Stack {
-    List<Object> arr = new ArrayList<Object>();
+    private List<Object> arr = new ArrayList<>();
 
     public void push(Object obj) {
         arr.add(obj);
     }
 
-    public void pop() {
+    public Object pop() {
         int length = arr.size();
+        Object temp = null;
         if (length > 0) {
+            temp = arr.get(length - 1);
             arr.remove(length - 1);
         } else {
             System.out.println("Empty stack");
-        }
+        } return temp;
+    }
+
+    public Object top() {
+        return arr.get(arr.size() - 1);
+    }
+
+    public int stackSize() {
+        return arr.size();
+    }
+
+    public boolean stackEmpty() {
+        return arr.isEmpty();
     }
 
     public void show() {
@@ -33,6 +47,9 @@ public class Stack {
         stack.push("(");
         stack.push(")");
         stack.show();
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+
 
         System.out.println("Check balPar with [()()(){] (should be false): " + stack.balancedParentheses("[()()(){]"));
         System.out.println("Check balPar with [()()(){]) (should be false): " + stack.balancedParentheses("[()()(){])"));
@@ -47,17 +64,17 @@ public class Stack {
                 stack1.push(text.charAt(i));
             }
             if (text.charAt(i) == ')') {
-                if (!stack1.arr.isEmpty() && stack1.arr.get(stack1.arr.size() - 1).equals('(')) {
+                if (!stack1.stackEmpty() && stack1.top().equals('(')) {
                     stack1.pop();
                 } else return false;
             }
             else if (text.charAt(i) == '}') {
-                if (!stack1.arr.isEmpty() && stack1.arr.get(stack1.arr.size() - 1).equals('{')) {
+                if (!stack1.stackEmpty() && stack1.top().equals('{')) {
                     stack1.pop();
                 } else return false;
             }
             else if (text.charAt(i) == ']') {
-                if (!stack1.arr.isEmpty() && stack1.arr.get(stack1.arr.size() - 1).equals('[')) {
+                if (!stack1.stackEmpty() && stack1.top().equals('[')) {
                     stack1.pop();
                 } else return false;
             }
